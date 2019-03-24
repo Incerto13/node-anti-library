@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title><%=title%></title>
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link href="css/styles.css" rel="stylesheet">
+	</head>
+	<body>
+<header class="navbar navbar-bright navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">Home</a>
+    </div>
+    <nav class="collapse navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <%for(let i=0; i<nav.length; i++) {%>
+        <li>
+          <a href="<%=nav[i].link%>"><%=nav[i].title%></a>
+        </li>
+        <%}%>
+        <li>
+        <%if (login) { %>
+            <a href="/auth/logout">Log Out</a>
+        <% }  else  { %>
+            <a href="/auth/signin">Sign In/Up</a>
+          <%}%>
+        </li>
+
+      </ul>
+      <ul class="nav navbar-right navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
+          <ul class="dropdown-menu" style="padding:12px;">
+            <form class="form-inline">
+              <button type="submit" class="btn btn-default pull-right"><i class="glyphicon glyphicon-search"></i></button><input type="text" class="form-control pull-left" placeholder="Search">
+            </form>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div id="masthead">  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1><%=title%>
+          <p class="lead"></p>
+        </h1>
+      </div>
+      <div class="col-md-5">
+        <div class="well well-lg"> 
+          <div class="row">
+            <div class="col-sm-12">
+              
+			
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div><!-- /cont -->
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="top-spacer"> </div>
+      </div>
+    </div> 
+  </div><!-- /cont -->
+  
+</div>
+
+
+<div class="container">
+  <div class="row">
+    
+    <div class="col-md-12"> 
+      
+      <div class="panel">
+        <div class="panel-body">
+          
+          
+          
+          <!--/stories-->
+          <div class="row">    
+           <div class="index">
+
+           <p>Welcome to Anti-Libary!</p>
+           <br/>
+           <p> Anti-library is a term that was coined by <a href="/authors/5c71a9a28fb930420ca71f01">Nassim Nicholas Taleb</a> (author) in his 
+           book <a href="/books/5c71aefa8fb930420ca72011">The Black Swan</a> for a concept he described in the context of Umberto Eco (1932-2016).</p>
+            <br/>
+           <p>The idea is that a private library is normally a collection of books that the owner has read and that there is little value in retaining 
+           these books unless one is going to refer to them from time to time. 
+           <b>A better idea is a collection of books one owns but hasn't read yet</b>, representing a corpus of 
+           potential learning. The name given for this was <b>anti-library</b>.</p>
+            <br/>
+           <p>A good library is filled with mostly unread books. That is the point. Our relationship with the unknown causes the very problem
+           Taleb is famous for contextualizing in many of his works. Because <b>we underestimate the value of what we don't know
+           and overvalue what we do know</b>, we fundamentaly misunderstand the likelihood of rare events.</p> 
+            <br/>
+           <p>The antidote to this overconfidence boils down to our relationship with knowledge.
+           The anti-scholar, as Taleb refers to it, is “someone who focuses on the unread books,
+           and makes an attempt not to treat his knowledge as a treasure, or even a possession, 
+           or even a self-esteem enhancement device — a skeptical empiricist.”</p>
+            <br/>
+           <p>Your anti-library serves as a visual reminder of what you don't know.</p>
+
+          </div>
+          <hr>
+          
+          
+        </div>
+      </div>
+                                                                                       
+	                                                
+                                                      
+   	</div><!--/col-12-->
+  </div>
+</div>
+                                                
+                                                                                
+<hr>
+
+<div class="container" id="footer">
+  <div class="row">
+    <div class="col col-sm-12">
+      
+      <h1>Follow Us</h1>
+      <div class="btn-group">
+       <a class="btn btn-twitter btn-lg" href="#"><i class="icon-twitter icon-large"></i> Twitter</a>
+	   <a class="btn btn-facebook btn-lg" href="#"><i class="icon-facebook icon-large"></i> Facebook</a>
+	   <a class="btn btn-google-plus btn-lg" href="#"><i class="icon-google-plus icon-large"></i> Google+</a>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <ul class="list-inline">
+          <li><i class="icon-facebook icon-2x"></i></li>
+          <li><i class="icon-twitter icon-2x"></i></li>
+          <li><i class="icon-google-plus icon-2x"></i></li>
+          <li><i class="icon-pinterest icon-2x"></i></li>
+        </ul>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+	<!-- script references -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+	</body>
+</html>
