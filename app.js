@@ -82,7 +82,7 @@ app.get('/', (req, res) => {
 /* ***** API Landing Page ***** */
 // HATEOAS - Self-Documenting Hyperlinks within the API
 app.get('/api', (req, res) => {
-  const users = { name: 'artists', link: `http://${req.headers.host}/api/users` };
+  const users = { name: 'users', link: `http://${req.headers.host}/api/users` };
   const books = { name: 'books', link: `http://${req.headers.host}/api/books` };
   const authors = { name: 'authors', link: `http://${req.headers.host}/api/authors` };
   const comments = { name: 'comments', link: `http://${req.headers.host}/api/comments` };
