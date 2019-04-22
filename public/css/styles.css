@@ -98,6 +98,7 @@ a,a:hover {
   text-decoration:none;
 }
 
+
 .icon-bar {
   background-color:#fff;
 }
@@ -124,6 +125,10 @@ a,a:hover {
 
 .navbar-bright li > a:hover {
   background-color:#000044;
+}
+
+.active {
+  background-color: darkmagenta !important;
 }
 
 .dropdown-menu {

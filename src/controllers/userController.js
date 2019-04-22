@@ -1,12 +1,12 @@
 const { MongoClient, ObjectID } = require('mongodb');
 const debug = require('debug')('app:userController');
 
+const url = 'mongodb://localhost:27017';
+const dbName = 'nodeAntiLibrary';
+
 function userController(nav) {
   function getIndex(req, res) {
     const { user } = req;
-    const url = 'mongodb://localhost:27017';
-    const dbName = 'anti_library';
-   
 
     (async function mongo() {
       let client;
@@ -31,7 +31,8 @@ function userController(nav) {
             nav,
             title: 'Users',
             users,
-            user // only way to send session user info, can't access req object directly from view
+            user, // only way to send session user info, can't access req object directly from view
+            path: '/users',
           }
         );
       } catch (err) {
@@ -44,8 +45,6 @@ function userController(nav) {
   function updateLibrary(req, res) {
     const { book, form } = req.body;
     const { _id } = req.user; // can pull the current session user data from this object
-    const url = 'mongodb://localhost:27017';
-    const dbName = 'anti_library';
 
     (async function mongo() {
       let client;
@@ -119,8 +118,6 @@ function userController(nav) {
 
   function getById(req, res) {
     const { id } = req.params;
-    const url = 'mongodb://localhost:27017';
-    const dbName = 'anti_library';
 
     (async function mongo() {
       let client;
@@ -160,7 +157,8 @@ function userController(nav) {
             title: 'User',
             user, 
             library,
-            anti_library        
+            anti_library,
+            path: '/users',        
           }
         );
       } catch (err) {

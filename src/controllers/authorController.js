@@ -1,10 +1,11 @@
 const { MongoClient, ObjectID } = require('mongodb');
 const debug = require('debug')('app:authorController');
 
+const url = 'mongodb://localhost:27017';
+const dbName = 'nodeAntiLibrary';
+
 function authorController(bookService, nav) {
   function getIndex(req, res) {
-    const url = 'mongodb://localhost:27017';
-    const dbName = 'anti_library';
 
     (async function mongo() {
       let client;
@@ -28,7 +29,8 @@ function authorController(bookService, nav) {
           {
             nav,
             title: 'Authors',
-            authors
+            authors,
+            path: '/authors',
           }
         );
       } catch (err) {
@@ -39,8 +41,6 @@ function authorController(bookService, nav) {
   }
   function getById(req, res) {
     const { id } = req.params;
-    const url = 'mongodb://localhost:27017';
-    const dbName = 'anti_library';
 
     (async function mongo() {
       let client;
@@ -70,7 +70,8 @@ function authorController(bookService, nav) {
             nav,
             title: 'Author',
             author,
-            books
+            books,
+            path: '/authors',
           }
         );
       } catch (err) {

@@ -1,0 +1,59 @@
+
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav class="collapse navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <a class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
+        </li>
+
+         <li>
+          <a class="<%= path === '/books' ? 'active' : '' %>" href="/books">Books</a>
+        </li>
+                <%if (login) { %>
+                  <li>
+                  <a class="<%= path === '/books/add' ? 'active' : '' %>" href="/books/add">Add Book</a>
+                  </li>
+                <% } %>
+         <li>
+          <a class="<%= path === '/authors' ? 'active' : '' %>" href="/authors">Authors</a>
+        </li>
+
+        <li>
+          <a class="<%= path === '/users' ? 'active' : '' %>" href="/users">Users</a>
+        </li>
+    
+        <%if (login) { %>
+            <li>
+            <a  href="/auth/logout">Log Out</a>
+            </li>
+        <% }  else  { %>
+            <li>
+            <a href="/auth/signin">Sign In/Up</a>
+            </li>
+        <% } %>
+
+           <li>
+          <a href="/api">API</a>
+          </li>
+
+      </ul>
+      <ul class="nav navbar-right navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
+          <ul class="dropdown-menu" style="padding:12px;">
+            <form class="form-inline">
+              <button type="submit" class="btn btn-default pull-right"><i class="glyphicon glyphicon-search"></i></button><input type="text" class="form-control pull-left" placeholder="Search">
+            </form>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>

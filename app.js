@@ -12,7 +12,7 @@ const session = require('express-session');
 const port = process.env.PORT || 3000;
 const app = express();
 
-const db = mongoose.connect('mongodb://localhost/anti_library', {
+const db = mongoose.connect('mongodb://localhost/nodeAntiLibrary', {
   useCreateIndex: true,
   useNewUrlParser: true
 });
@@ -47,7 +47,8 @@ app.set('view engine', 'ejs');
 const nav = [
   { link: '/books', title: 'Books' },
   { link: '/authors', title: 'Authors' },
-  { link: '/users', title: 'Users' }
+  { link: '/users', title: 'Users' },
+  { link: '/api', title: 'API' }
 ];
 
 app.use((req, res, next) => {
@@ -73,19 +74,32 @@ app.get('/', (req, res) => {
     {
       nav,    
       title: 'Anti-Library',
+      path: '/',
+    }
+  );
+});
+
+/* ***** API Landing Page ***** */
+// HATEOAS - Self-Documenting Hyperlinks within the API
+app.get('/api', (req, res) => {
+  const users = { name: 'artists', link: `http://${req.headers.host}/api/users` };
+  const books = { name: 'books', link: `http://${req.headers.host}/api/books` };
+  const authors = { name: 'authors', link: `http://${req.headers.host}/api/authors` };
+  const comments = { name: 'comments', link: `http://${req.headers.host}/api/comments` };
+  res.json(
+    { 
+      header: 'Welcome to the REST API for this site. Below are the four major endpoints.',
+      endpoints: [users, books, authors, comments],
     }
   );
 });
 
 /* ***** API Routing ***** */
-app.get('/api', (req, res) => {
-  res.send('Welcome to the Anti-library API!');
-});
-
 app.use('/api/users', api_userRouter);
 app.use('/api/books', api_bookRouter);
 app.use('/api/authors', api_authorRouter);
 app.use('/api/comments', api_commentRouter);
+
 
 app.use((err, req, res, next) => {
   // log the error...

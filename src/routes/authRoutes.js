@@ -2,6 +2,7 @@ const express = require('express');
 const { MongoClient } = require('mongodb');
 const debug = require('debug')('app:authRoutes');
 const passport = require('passport');
+const bcrypt = require('bcryptjs');
 
 const authRouter = express.Router();
 
@@ -10,7 +11,8 @@ function router(nav) {
     .get((req, res) => {
       res.render('signUp', {
         nav,
-        title: 'Sign Up'
+        title: 'Sign Up',
+        path: '/signup',
       });
     })
     .post((req, res) => { 
@@ -33,9 +35,11 @@ function router(nav) {
           const library = [];
           const anti_library = [];
 
-          const user = ({ username, password, avatar, bio, library, anti_library });
+          const hashedPassword = await bcrypt.hash(password, 12);
+          const user = ({ username, password: hashedPassword, avatar, bio, library, anti_library });
           const results = await col.insertOne(user);
           
+
           debug(results);
           req.login(results.ops[0], () => {
             // this will redirect to the route below which just redirects to userView
@@ -50,7 +54,8 @@ function router(nav) {
     .get((req, res) => {
       res.render('signIn', {
         nav,
-        title: 'Sign In'
+        title: 'Sign In',
+        path: '/signin',
       });
     })
     .post(passport.authenticate('local', {

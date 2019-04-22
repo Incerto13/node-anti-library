@@ -1,5 +1,5 @@
 {
-  "name": "library",
+  "name": "node-anti-library",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -9,10 +9,11 @@
     "lint": "eslint app.js",
     "lint-fix": "eslint app.js --fix"
   },
-  "author": "",
+  "author": "Akin Adekoya",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "bootstrap": "^3.3.7",
     "chalk": "^2.4.2",

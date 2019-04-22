@@ -1,11 +1,12 @@
 const { MongoClient, ObjectID } = require('mongodb');
 const debug = require('debug')('app:bookController');
 
+const url = 'mongodb://localhost:27017';
+const dbName = 'nodeAntiLibrary';
+
 function bookController(bookService, nav) {
   function getIndex(req, res) {
-    const url = 'mongodb://localhost:27017';
-    const dbName = 'anti_library';
-  
+
     (async function mongo() {
       let client;
       try {
@@ -44,7 +45,8 @@ function bookController(bookService, nav) {
           {
             nav,
             title: 'Books',
-            books
+            books,
+            path: '/books',
           }
         );
       } catch (err) {
@@ -55,8 +57,6 @@ function bookController(bookService, nav) {
   }
 
   function getAddBook(req, res) {
-    const url = 'mongodb://localhost:27017';
-    const dbName = 'anti_library';
 
     (async function mongo() {
       let client;
@@ -73,7 +73,8 @@ function bookController(bookService, nav) {
         res.render('addBook', {
           nav,
           title: 'Add Book',
-          authors
+          authors,
+          path: '/books/add',
 
         });
       } catch (err) {
@@ -86,8 +87,6 @@ function bookController(bookService, nav) {
 
   function postAddBook(req, res) {
     const { title, bookId, author } = req.body;
-    const url = 'mongodb://localhost:27017';
-    const dbName = 'anti_library';
 
     (async function mongo() {
       let client;
@@ -117,8 +116,6 @@ function bookController(bookService, nav) {
   function postBookComment(req, res) {
     const { book, text } = req.body;
     const { _id } = req.user; // can pull the current session user data from this object
-    const url = 'mongodb://localhost:27017';
-    const dbName = 'anti_library';
 
     (async function mongo() {
       let client;
@@ -151,8 +148,6 @@ function bookController(bookService, nav) {
   function getById(req, res) {
     const { id } = req.params;
     let { user } = req;
-    const url = 'mongodb://localhost:27017';
-    const dbName = 'anti_library';
 
     (async function mongo() {
       let client;
@@ -204,7 +199,6 @@ function bookController(bookService, nav) {
         let anti_libraryIndex = -1;
 
         if (req.user) { 
-          debug('There is a req.user!!!!!!!!!!!!!!');
           debug(req.user);
           // const { _id } = user;
           // user = await colUsers.findOne({ _id: new ObjectID(_id) });
@@ -213,7 +207,7 @@ function bookController(bookService, nav) {
         } 
         
 
-        debug('******* Session user information ****');
+        debug('**** Session user information ****');
         // debug(`library: ${library}`);
         // debug(`anti_library: ${anti_library}`);
         debug('req.user: ');
@@ -234,7 +228,8 @@ function bookController(bookService, nav) {
             comments,
             user,
             libraryIndex,
-            anti_libraryIndex
+            anti_libraryIndex,
+            path: '/books',
           }
         );
       } catch (err) {
