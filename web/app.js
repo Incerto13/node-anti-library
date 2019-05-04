@@ -12,7 +12,15 @@ const session = require('express-session');
 const port = process.env.PORT || 3000;
 const app = express();
 
-const db = mongoose.connect('mongodb://localhost/nodeAntiLibrary', {
+// dev = 'localhost', prod(container) = 'db'
+let MONGODB_URL;
+if (process.env.NODE_ENV == 'production') {
+  MONGODB_URL = 'mongodb://db:27017/nodeAntiLibrary';
+} else {
+  MONGODB_URL = 'mongodb://localhost:27017/nodeAntiLibrary';
+}
+
+const db = mongoose.connect(MONGODB_URL, {
   useCreateIndex: true,
   useNewUrlParser: true
 });
@@ -44,23 +52,16 @@ app.use('/js', express.static(path.join(__dirname, '/node_modules/jquery/dist'))
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
-const nav = [
-  { link: '/books', title: 'Books' },
-  { link: '/authors', title: 'Authors' },
-  { link: '/users', title: 'Users' },
-  { link: '/api', title: 'API' }
-];
-
 app.use((req, res, next) => {
   res.locals.login = req.isAuthenticated();
   next();
 });
 
-const bookRouter = require('./src/routes/bookRoutes')(nav);
-const authorRouter = require('./src/routes/authorRoutes')(nav);
-const userRouter = require('./src/routes/userRoutes')(nav);
-const adminRouter = require('./src/routes/adminRoutes')(nav);
-const authRouter = require('./src/routes/authRoutes')(nav);
+const bookRouter = require('./src/routes/bookRoutes')(MONGODB_URL);
+const authorRouter = require('./src/routes/authorRoutes')(MONGODB_URL);
+const userRouter = require('./src/routes/userRoutes')(MONGODB_URL);
+const adminRouter = require('./src/routes/adminRoutes')(MONGODB_URL);
+const authRouter = require('./src/routes/authRoutes')(MONGODB_URL);
 
 app.use('/books', bookRouter); 
 app.use('/authors', authorRouter); 
@@ -71,8 +72,7 @@ app.use('/auth', authRouter);
 app.get('/', (req, res) => {
   res.render(
     'index',
-    {
-      nav,    
+    {    
       title: 'Anti-Library',
       path: '/',
     }

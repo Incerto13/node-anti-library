@@ -1,17 +1,16 @@
 const { MongoClient, ObjectID } = require('mongodb');
 const debug = require('debug')('app:userController');
 
-const url = 'mongodb://localhost:27017';
 const dbName = 'nodeAntiLibrary';
 
-function userController(nav) {
+function userController(MONGODB_URL) {
   function getIndex(req, res) {
     const { user } = req;
 
     (async function mongo() {
       let client;
       try {
-        client = await MongoClient.connect(url);
+        client = await MongoClient.connect(MONGODB_URL);
         debug('Connected correctly to server');
         
         const db = client.db(dbName);
@@ -28,7 +27,6 @@ function userController(nav) {
         res.render(
           'userListView',
           {
-            nav,
             title: 'Users',
             users,
             user, // only way to send session user info, can't access req object directly from view
@@ -49,7 +47,7 @@ function userController(nav) {
     (async function mongo() {
       let client;
       try {
-        client = await MongoClient.connect(url);
+        client = await MongoClient.connect(MONGODB_URL);
         debug('Connected correctly to server');
         
         const db = client.db(dbName);
@@ -122,7 +120,7 @@ function userController(nav) {
     (async function mongo() {
       let client;
       try {
-        client = await MongoClient.connect(url);
+        client = await MongoClient.connect(MONGODB_URL);
         debug('Connected correctly to server');
         
         const db = client.db(dbName);
@@ -153,7 +151,6 @@ function userController(nav) {
         res.render(
           'userView',
           {
-            nav,
             title: 'User',
             user, 
             library,

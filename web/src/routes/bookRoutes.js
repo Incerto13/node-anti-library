@@ -4,8 +4,8 @@ const bookController = require('../controllers/bookController');
 const bookRouter = express.Router();
 const bookService = require('../services/goodreadsService');
 
-function router(nav) {
-  const { getIndex, getAddBook, postAddBook, postBookComment, getById, middleware } = bookController(bookService, nav);
+function router(MONGODB_URL) {
+  const { getIndex, getAddBook, postAddBook, postBookComment, getById, middleware } = bookController(bookService, MONGODB_URL);
   bookRouter.use(middleware);
   bookRouter.route('/')
     .get(getIndex);

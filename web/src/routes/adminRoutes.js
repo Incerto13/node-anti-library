@@ -15,16 +15,15 @@ const books = [
 ];
 
 
-function router(nav) {
+function router(MONGODB_URL) {
   adminRouter.route('/')
     .get((req, res) => {
-      const url = 'mongodb://localhost:27017';
       const dbName = 'nodeAntiLibrary';
 
       (async function mong() {
         let client;
         try {
-          client = await MongoClient.connect(url);
+          client = await MongoClient.connect(MONGODB_URL);
           debug('Connected correctly to server');
           
           const db = client.db(dbName);

@@ -1,16 +1,15 @@
 const { MongoClient, ObjectID } = require('mongodb');
 const debug = require('debug')('app:authorController');
 
-const url = 'mongodb://localhost:27017';
 const dbName = 'nodeAntiLibrary';
 
-function authorController(bookService, nav) {
+function authorController(bookService, MONGODB_URL) {
   function getIndex(req, res) {
 
     (async function mongo() {
       let client;
       try {
-        client = await MongoClient.connect(url);
+        client = await MongoClient.connect(MONGODB_URL);
         debug('Connected correctly to server');
         
         const db = client.db(dbName);
@@ -27,7 +26,6 @@ function authorController(bookService, nav) {
         res.render(
           'authorListView',
           {
-            nav,
             title: 'Authors',
             authors,
             path: '/authors',
@@ -45,7 +43,7 @@ function authorController(bookService, nav) {
     (async function mongo() {
       let client;
       try {
-        client = await MongoClient.connect(url);
+        client = await MongoClient.connect(MONGODB_URL);
         debug('Connected correctly to server');
         
         const db = client.db(dbName);
@@ -67,7 +65,6 @@ function authorController(bookService, nav) {
         res.render(
           'authorView',
           {
-            nav,
             title: 'Author',
             author,
             books,

@@ -1,2 +1,6 @@
 node_modules
 app-env
+app.env
+Junk
+data
+mongo-seed/export_script.sh

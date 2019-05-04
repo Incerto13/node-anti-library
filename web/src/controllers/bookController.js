@@ -1,16 +1,15 @@
 const { MongoClient, ObjectID } = require('mongodb');
 const debug = require('debug')('app:bookController');
 
-const url = 'mongodb://localhost:27017';
 const dbName = 'nodeAntiLibrary';
 
-function bookController(bookService, nav) {
+function bookController(bookService, MONGODB_URL) {
   function getIndex(req, res) {
 
     (async function mongo() {
       let client;
       try {
-        client = await MongoClient.connect(url);
+        client = await MongoClient.connect(MONGODB_URL);
         debug('Connected correctly to server');
         
         const db = client.db(dbName);
@@ -43,7 +42,6 @@ function bookController(bookService, nav) {
         res.render(
           'bookListView',
           {
-            nav,
             title: 'Books',
             books,
             path: '/books',
@@ -61,7 +59,7 @@ function bookController(bookService, nav) {
     (async function mongo() {
       let client;
       try {
-        client = await MongoClient.connect(url);
+        client = await MongoClient.connect(MONGODB_URL);
         debug('Connected correctly to server');
         
         const db = client.db(dbName);
@@ -71,7 +69,6 @@ function bookController(bookService, nav) {
         const authors = await col.find().toArray();
 
         res.render('addBook', {
-          nav,
           title: 'Add Book',
           authors,
           path: '/books/add',
@@ -91,7 +88,7 @@ function bookController(bookService, nav) {
     (async function mongo() {
       let client;
       try {
-        client = await MongoClient.connect(url);
+        client = await MongoClient.connect(MONGODB_URL);
         debug('Connected correctly to server');
         
         const db = client.db(dbName);
@@ -120,7 +117,7 @@ function bookController(bookService, nav) {
     (async function mongo() {
       let client;
       try {
-        client = await MongoClient.connect(url);
+        client = await MongoClient.connect(MONGODB_URL);
         debug('Connected correctly to server');
         
         const db = client.db(dbName);
@@ -152,7 +149,7 @@ function bookController(bookService, nav) {
     (async function mongo() {
       let client;
       try {
-        client = await MongoClient.connect(url);
+        client = await MongoClient.connect(MONGODB_URL);
         debug('Connected correctly to server');
         
         const db = client.db(dbName);
@@ -222,7 +219,6 @@ function bookController(bookService, nav) {
         res.render(
           'bookView',
           {
-            nav,
             title: 'Book',
             book, 
             comments,

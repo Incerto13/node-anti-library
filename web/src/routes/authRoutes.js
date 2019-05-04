@@ -6,11 +6,10 @@ const bcrypt = require('bcryptjs');
 
 const authRouter = express.Router();
 
-function router(nav) {
+function router(MONGODB_URL) {
   authRouter.route('/signUp')
     .get((req, res) => {
       res.render('signUp', {
-        nav,
         title: 'Sign Up',
         path: '/signup',
       });
@@ -18,13 +17,12 @@ function router(nav) {
     .post((req, res) => { 
       debug(req.body);
       const { username, password, avatar, bio } = req.body;
-      const url = 'mongodb://localhost:27017';
       const dbName = 'anti_library';
 
       (async function addUser() {
         let client;
         try {
-          client = await MongoClient.connect(url);
+          client = await MongoClient.connect(MONGODB_URL);
           debug('Connected correctly to server'); 
 
           const db = client.db(dbName);
@@ -53,7 +51,6 @@ function router(nav) {
   authRouter.route('/signIn')
     .get((req, res) => {
       res.render('signIn', {
-        nav,
         title: 'Sign In',
         path: '/signin',
       });
