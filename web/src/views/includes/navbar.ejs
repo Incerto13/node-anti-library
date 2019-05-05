@@ -34,7 +34,15 @@
             <li>
             <a  href="/auth/logout">Log Out</a>
             </li>
-        <% }  else  { %>
+        <% }  else if (path === '/signin') { %>
+            <li>
+            <a href="/auth/signup">Sign Up</a>
+            </li>
+        <% }  else if (path === '/signup') { %>
+          <li>
+          <a href="/auth/signin">Sign In</a>
+          </li>
+        <% }  else { %>
             <li>
             <a href="/auth/signin">Sign In/Up</a>
             </li>
